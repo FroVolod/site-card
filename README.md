@@ -7,5 +7,12 @@ Install extra project modules buy issuing the following command from the termina
 
 pip install -r requirements.txt
 
-В первом окне терминала запустить проект:
-  $ python manage.py runserver 9000
+$ python manage.py runserver 9000
+
+Открыть второй терминал
+
+cd "C:\path\to\the\project\folder\site-card\auto-rti-react"
+
+npm install
+
+npm run dev
