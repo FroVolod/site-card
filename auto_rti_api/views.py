@@ -3,7 +3,8 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-import csv 
+import csv
+from django.db.models import Q
 
 from .models import WebsitePage, ProductList
 from .serializers import WebsitePageSerializer, ProductListSerializer
@@ -17,7 +18,12 @@ class WebsitePageViewSet(viewsets.ModelViewSet):
 
 class ProductListView(APIView):
     def get(self, request):
-        product_list = ProductList.objects.all()
+        category = request.GET.get('category')
+        car_name = request.GET.get('car_name')
+        if category or car_name:
+            product_list = ProductList.objects.filter(Q(category=category) | Q(car_name=car_name))
+        else:
+            product_list = ProductList.objects.all()
         product_list_serializer = ProductListSerializer(product_list, many=True)
         return Response(product_list_serializer.data)
 

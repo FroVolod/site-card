@@ -9,5 +9,5 @@ router.register('auto-rti', WebsitePageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('uploads', ProductListView.as_view()),
+    path('uploads/', ProductListView.as_view()),
 ]
