@@ -3,7 +3,6 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
-from rest_framework_json_api.pagination import PageNumberPagination
 
 import csv
 from django.db.models import Q
@@ -29,12 +28,11 @@ class ProductListView(APIView):
         else:
             product_list = ProductList.objects.all()
 
-        paginator = PageNumberPagination()
+        paginator = self.settings.DEFAULT_PAGINATION_CLASS()
         page = paginator.paginate_queryset(product_list, request)
 
         product_list_serializer = ProductListSerializer(page, many=True)
         return paginator.get_paginated_response(product_list_serializer.data)
-
 
     def post(self, request, *args, **kwargs):
         up_file = request.FILES['file']
