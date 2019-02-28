@@ -1,5 +1,5 @@
 import Layout from '../components/layout'
-import fetch from 'isomorphic-unfetch'
+// import fetch from 'isomorphic-unfetch'
 
 
 class Index extends React.Component {
